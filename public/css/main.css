@@ -1,0 +1,26 @@
+html, body {
+    font-family: 'Prompt', sans-serif;
+}
+
+.icon-bar {
+    background: #000000;
+}
+
+.sidenav {
+    height: 100vh;
+    background: #ffffff;
+}
+
+.content {
+    /*background: #CFD8DC;*/
+    background: #ECEFF1;
+}
+
+.well {
+    background: #ffffff;
+}
+
+.chart {
+    width: 100%;
+    min-height: 450px;
+}
