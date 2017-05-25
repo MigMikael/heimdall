@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\BeaconData;
+use Carbon\Carbon;
 
 class BeaconDataTableSeeder extends Seeder
 {
@@ -11218,7 +11220,21 @@ class BeaconDataTableSeeder extends Seeder
                 'updated_at' => '2017-05-24 20:58:13',
             ),
         ));
-        
-        
+
+        \DB::table('beacon_data')->where('id', 1)
+            ->update(['time_delta' => 0]);
+
+        $prev_data = BeaconData::find(1);
+        for ($i = 2; $i <= 1244; $i++){
+            $beacon_data = BeaconData::find($i);
+
+            $st = new Carbon($prev_data->created_at);
+            $en = new Carbon($beacon_data->created_at);
+            $diff = $en->diffInSeconds($st);
+
+            \DB::table('beacon_data')->where('id', $i)
+                ->update(['time_delta' => $diff]);
+        }
+
     }
 }

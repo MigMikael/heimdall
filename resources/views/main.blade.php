@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
     @yield('graph')
-    <title>{{ config('app.name') }}</title>
+    <title>{{ getenv("APP_NAME") }}</title>
 </head>
 <body>
     <nav class="navbar visible-xs">
@@ -22,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
+                <a class="navbar-brand" href="#">{{ getenv("APP_NAME") }}</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">

@@ -16,7 +16,7 @@ class BeaconController extends Controller
         //$d = BeaconData::where('created_at', $data[6])->get();
 
         //$first_mac = $mac_list[0];
-        $beacons = BeaconData::where('mac_address', "cd:18:e2:48:d6:53")->orderBy('created_at')->get();
+        $beacons = BeaconData::where('mac_address', "cd:18:e2:48:d6:53")->take(200)->get();
 
         //return $beacons;
         return view('beacon.index', ['beacons' => $beacons/*, 'mac_list' => $mac_list*/]);

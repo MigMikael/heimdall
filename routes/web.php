@@ -20,3 +20,6 @@ Route::get('dashboard', 'HomeController@dashboard');
 Route::get('beacon', 'BeaconController@index');
 
 Route::get('event', 'EventController@index');
+
+
+Route::get('test/time', 'TestController@testTimeDiff');

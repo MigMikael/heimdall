@@ -16,7 +16,7 @@
 
             data.addRows([
                 @foreach($beacons as $beacon)
-                ['{{ $loop->iteration }}', {{ $beacon->RSSI }} ],
+                ['{{ $beacon->time_delta }}', {{ $beacon->RSSI }} ],
                 @endforeach
             ]);
 
