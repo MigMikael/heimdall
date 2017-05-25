@@ -26,9 +26,15 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li @if(Request::is('dashboard')) class="active" @endif><a href="{{ url('dashboard') }}">Welcome</a></li>
-                    <li @if(Request::is('beacon')) class="active" @endif><a href="{{ url('beacon') }}">Beacon</a></li>
-                    <li @if(Request::is('event')) class="active" @endif><a href="{{ url('event') }}">Event</a></li>
+                    <li @if(Request::is('dashboard') || Request::is('dashboard/*')) class="active" @endif>
+                        <a href="{{ url('dashboard') }}">Welcome</a>
+                    </li>
+                    <li @if(Request::is('beacon') || Request::is('beacon/*')) class="active" @endif>
+                        <a href="{{ url('beacon') }}">Beacon</a>
+                    </li>
+                    <li @if(Request::is('event') || Request::is('event/*')) class="active" @endif>
+                        <a href="{{ url('event') }}">Event</a>
+                    </li>
                     {{--<li><a href="">Gender</a></li>
                     <li><a href="">Geo</a></li>--}}
                 </ul>
@@ -40,9 +46,15 @@
             <div class="col-sm-2 sidenav hidden-xs">
                 <h1>{{ config('app.name') }}</h1>
                 <ul class="nav nav-pills nav-stacked">
-                    <li @if(Request::is('dashboard')) class="active" @endif><a href="{{ url('dashboard') }}">Welcome</a></li>
-                    <li @if(Request::is('beacon')) class="active" @endif><a href="{{ url('beacon') }}">Beacon</a></li>
-                    <li @if(Request::is('event')) class="active" @endif><a href="{{ url('event') }}">Event</a></li>
+                    <li @if(Request::is('dashboard') || Request::is('dashboard/*')) class="active" @endif>
+                        <a href="{{ url('dashboard') }}">Welcome</a>
+                    </li>
+                    <li @if(Request::is('beacon') || Request::is('beacon/*')) class="active" @endif>
+                        <a href="{{ url('beacon') }}">Beacon</a>
+                    </li>
+                    <li @if(Request::is('event') || Request::is('event/*')) class="active" @endif>
+                        <a href="{{ url('event') }}">Event</a>
+                    </li>
                     {{--<li><a href="">Gender</a></li>
                     <li><a href="">Geo</a></li>--}}
                 </ul><br>

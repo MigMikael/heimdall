@@ -18,6 +18,8 @@ Route::get('/', function () {
 Route::get('dashboard', 'HomeController@dashboard');
 
 Route::get('beacon', 'BeaconController@index');
+Route::get('beacon/take/{record}', 'BeaconController@take');
+Route::get('beacon/take/{start}/{end}', 'BeaconController@takeRange');
 
 Route::get('event', 'EventController@index');
 

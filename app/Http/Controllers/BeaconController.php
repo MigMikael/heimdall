@@ -10,16 +10,53 @@ class BeaconController extends Controller
 {
     public function index()
     {
-        //$mac_list = BeaconData::groupBy('mac_address')->pluck('mac_address');
-        //$data = BeaconData::orderBy('created_at')->get();
-        //$data = BeaconData::groupBy('mac_address')->pluck('mac_address');
-        //$d = BeaconData::where('created_at', $data[6])->get();
-
-        //$first_mac = $mac_list[0];
-        $beacons = BeaconData::where('mac_address', "cd:18:e2:48:d6:53")->take(200)->get();
+        $beacons = BeaconData::where('mac_address', "cd:18:e2:48:d6:53")->get();
 
         //return $beacons;
-        return view('beacon.index', ['beacons' => $beacons/*, 'mac_list' => $mac_list*/]);
+        return view('beacon.index', ['data' => $beacons]);
+    }
+
+    public function take($record)
+    {
+        $beacons = BeaconData::where('mac_address', "cd:18:e2:48:d6:53")
+            ->take($record)->get();
+
+        $data = [];
+
+        $last_beacon = $beacons[sizeof($beacons) - 1];
+
+        foreach ($beacons as $beacon){
+            $data[$beacon->time_delta] = $beacon;
+        }
+        for ($i = 0; $i <= $last_beacon->time_delta; $i++){
+            if(!isset($data[$i])){
+                $data[$i] = $data[$i - 1];
+            }
+        }
+
+        /*$c = 0;
+        foreach ($data as $datum){
+            echo "<b>".$c."</b><br>";
+            if($datum == null){
+                echo 'null<br>';
+            }else{
+                echo $datum->id." ".$datum->time_delta.'<br>';
+            }
+            echo '___________________________________________________________<br>';
+            $c++;
+        }*/
+
+        //return $data;
+        return view('beacon.index', ['data' => $data, 'record' => $record]);
+    }
+
+    public function takeRange($start, $end){
+        $beacons = BeaconData::where('mac_address', "cd:18:e2:48:d6:53")
+            ->skip($start)
+            ->take($end - $start)
+            ->get();
+        return $beacons;
+        //return view('beacon.index', ['beacons' => $beacons, 'start' => $start, 'end' => $end]);
     }
 
     public function store(Request $request)

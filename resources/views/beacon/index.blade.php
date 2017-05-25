@@ -14,10 +14,14 @@
             data.addColumn('number', 'cd:18:e2:48:d6:53');
             {{--@endforeach--}}
 
+            @php
+                $c = 0;
+            @endphp
+
             data.addRows([
-                @foreach($beacons as $beacon)
-                ['{{ $beacon->time_delta }}', {{ $beacon->RSSI }} ],
-                @endforeach
+                @for($i = 0; $i < sizeof($data); $i++)
+                ['{{ $i }}', {{ $data[$i]->RSSI }}],
+                @endfor
             ]);
 
             /*data.addRows([
@@ -39,7 +43,13 @@
 
             var options = {
                 chart: {
-                    title: 'Data from beacon in graph form',
+                    @if(isset($record))
+                    title: 'Data from beacon {{ $record }} record',
+                    @elseif(isset($start) && isset($end))
+                    title: 'Data from beacon start at {{ $start +1 }} to {{ $end }}',
+                    @else
+                    title: 'Data from beacon all record',
+                    @endif
                     subtitle: 'relation between time and RSSI in each Beacon'
                 },
                 /*width: 900,
