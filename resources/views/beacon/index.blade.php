@@ -9,12 +9,18 @@
         function drawChart() {
 
             var data = new google.visualization.DataTable();
-            data.addColumn('number', 'Day');
-            data.addColumn('number', 'Guardians of the Galaxy');
-            data.addColumn('number', 'The Avengers');
-            data.addColumn('number', 'Transformers: Age of Extinction');
+            data.addColumn('string', 'Time');
+            {{--@foreach($mac_list as $mac)--}}
+            data.addColumn('number', 'cd:18:e2:48:d6:53');
+            {{--@endforeach--}}
 
             data.addRows([
+                @foreach($beacons as $beacon)
+                ['{{ $loop->iteration }}', {{ $beacon->RSSI }} ],
+                @endforeach
+            ]);
+
+            /*data.addRows([
                 [1,  -37.8, 80.8, 41.8],
                 [2,  30.9, 69.5, 32.4],
                 [3,  25.4,   57, 25.7],
@@ -29,12 +35,12 @@
                 [12,  6.6,  8.4,  5.2],
                 [13,  4.8,  6.3,  3.6],
                 [14,  4.2,  6.2,  3.4]
-            ]);
+            ]);*/
 
             var options = {
                 chart: {
-                    title: 'Box Office Earnings in First Two Weeks of Opening',
-                    subtitle: 'in millions of dollars (USD)'
+                    title: 'Data from beacon in graph form',
+                    subtitle: 'relation between time and RSSI in each Beacon'
                 },
                 /*width: 900,
                  height: 500,*/
@@ -53,8 +59,23 @@
 @stop
 
 @section('content')
-    <div class="well">
-        <h1>Beacon</h1>
-        <div id="line_top_x" class="chart"></div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#graph">Graph</a></li>
+        <li><a data-toggle="tab" href="#table">Table</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="graph" class="tab-pane fade in active">
+            <div class="well">
+                <h1>Beacon</h1>
+                <div id="line_top_x" class="chart"></div>
+            </div>
+        </div>
+        <div id="table" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+
     </div>
+
 @stop

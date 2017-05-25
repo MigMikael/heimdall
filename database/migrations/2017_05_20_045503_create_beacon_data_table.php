@@ -18,6 +18,7 @@ class CreateBeaconDataTable extends Migration
             $table->string('beacon_id');
             $table->string('mac_address');
             $table->integer('RSSI');
+            $table->bigInteger('time_delta');
             $table->timestamps();
         });
     }

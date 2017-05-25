@@ -9,6 +9,6 @@ class BeaconData extends Model
     public $timestamps = true;
     protected $table = 'beacon_data';
     protected $fillable = [
-        'beacon_id', 'mac_address', 'RSSI',
+        'beacon_id', 'mac_address', 'RSSI', 'time_delta'
     ];
 }
