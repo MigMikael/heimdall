@@ -10,15 +10,17 @@ class BeaconController extends Controller
 {
     public function index()
     {
-        $beacons = BeaconData::where('mac_address', "cd:18:e2:48:d6:53")->get();
+        $mac_address = getenv("MAC");
+        $beacons = BeaconData::where('mac_address', $mac_address)->get();
 
         //return $beacons;
-        return view('beacon.index', ['data' => $beacons]);
+        return view('beacon.index', ['beacons' => $beacons]);
     }
 
     public function take($record)
     {
-        $beacons = BeaconData::where('mac_address', "cd:18:e2:48:d6:53")
+        $mac_address = getenv("MAC");
+        $beacons = BeaconData::where('mac_address', $mac_address)
             ->take($record)->get();
 
         $data = [];
@@ -47,16 +49,25 @@ class BeaconController extends Controller
         }*/
 
         //return $data;
-        return view('beacon.index', ['data' => $data, 'record' => $record]);
+        return view('beacon.index', [
+            'data' => $data,
+            'beacons' => $beacons,
+            'record' => $record
+        ]);
     }
 
     public function takeRange($start, $end){
-        $beacons = BeaconData::where('mac_address', "cd:18:e2:48:d6:53")
+        $mac_address = getenv("MAC");
+        $beacons = BeaconData::where('mac_address', $mac_address)
             ->skip($start)
             ->take($end - $start)
             ->get();
-        return $beacons;
-        //return view('beacon.index', ['beacons' => $beacons, 'start' => $start, 'end' => $end]);
+
+        return view('beacon.index', [
+            'beacons' => $beacons,
+            'start' => $start,
+            'end' => $end
+        ]);
     }
 
     public function store(Request $request)
